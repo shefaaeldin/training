@@ -52,16 +52,20 @@ class ResetPasswordController extends Controller
      public function reset(Request $request)
     {
          
-         
-         
-         
           $loginInput = request()->input('email');
-       
         if(!filter_var($loginInput, FILTER_VALIDATE_EMAIL))
         {
-        
-        $user = User::where('phone',$loginInput)->first();
+            $user = User::where('phone',$loginInput)->first();
+            
+        if($user == NULL)
+           {
+              return redirect()->back()->withInput()->with('wrong_phone','We can\'t find a user with this phone number ');
+           }
+           
+        else
+              { 
            request()->merge(['email'=>$user->email]);
+              }
         }
         
         //dd($request->all());

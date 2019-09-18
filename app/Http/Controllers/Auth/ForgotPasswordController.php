@@ -31,7 +31,7 @@ class ForgotPasswordController extends Controller
        
         if(filter_var($loginInput, FILTER_VALIDATE_EMAIL))
         {
-        
+             
           $request->validate(['email' => 'required|email']);
         }
         
@@ -39,9 +39,17 @@ class ForgotPasswordController extends Controller
         {
             
            $user = User::where('phone',$loginInput)->first();
+           
+           if($user == NULL)
+           {
+              return redirect()->back();
+           }
+           else
+           {
            request()->merge(['email'=>$user->email]);
             $request->validate(['email' => 'required|email']);
            //dd(request()->all());
+           }
            
         }
        
