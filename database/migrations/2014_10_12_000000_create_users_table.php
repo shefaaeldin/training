@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->boolean('email_sent')->nullable();
             $table->rememberToken();
             $table->timestamps();
+          
         });
     }
 

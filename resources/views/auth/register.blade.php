@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<body class="gray-bg">
+<div id ="app">
 <div class="middle-box text-center loginscreen   animated fadeInDown">
         <div>
             <div>
@@ -91,6 +93,8 @@
             <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
         </div>
     </div>
+    </div>
+    </body>
 
  <!-- Mainly scripts -->
     <script src="js/jquery-3.1.1.min.js"></script>
