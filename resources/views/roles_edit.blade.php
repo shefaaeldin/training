@@ -14,8 +14,8 @@
                             <img alt="image" class="img-circle" src="{{asset('styles/img/profile_small.jpg')}}" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{auth()->user()->first_name}}</strong>
+                             </span> <span class="text-muted text-xs block">{{auth()->user()->role->name}} <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Profile</a></li>
                             <li><a href="contacts.html">Contacts</a></li>
@@ -191,34 +191,35 @@
 
                         <div class="table-responsive">
                             
-                            <form>
+                            <form action="{{url('/roles/'.$role->id)}}" method="post">
+                                @csrf
+                                @method('patch')
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                         
                     <thead>
                     <tr>
                         <th>Select all</th>
                         <th>Model name</th>
-                        <th>List</th>
-                        <th>Create</th>
-                        <th>edit</th>
-                        <th>delete</th>
+                            @foreach($actions as $action)
+                        <th>{{$action}}</th>
+                        @endforeach
                         
                     </tr>
                     </thead>
                     <tbody>
                   
         
-        
+        @foreach($names as $name)
          <tr class="gradeX">
-                        <td></td>
-                        <td></td>
-                        <td class="center"><a href="/roles/edit"><span class="glyphicon glyphicon-edit"></span></a></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class = "{{$name}}_all"><input type="checkbox" ></td>
+                        <td>{{$name}}</td>
+                        @foreach($actions as $action)
+                        <td class = "{{$name}}_{{$action}}}"><input type="checkbox" name="actions[]" {{$role->permissions->contains(\App\Permission::where("name","=",$name."_".$action)->first())? "checked" : ""}} value="{{$name}}_{{$action}}" ></td>
+                        @endforeach
                          
                        
                     </tr>
+                    @endforeach
         
                     </tbody>
                     

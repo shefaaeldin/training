@@ -1,5 +1,7 @@
 <?php
 
+use App\Role;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +19,9 @@ Route::get('/', 'HomeController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/users/list', 'UsersController@index')->name('users_list');
-Route::resource('users', 'UsersController');
-Route::get('/roles/list', 'RolesController@index')->name('roles_list');
-Route::resource('roles', 'RolesController');
+Route::get('/users/list', 'UsersController@index')->name('users_list')->middleware('auth','RoleAuth');
+Route::resource('users', 'UsersController')->middleware('auth','RoleAuth');
+Route::get('/roles/list', 'RolesController@index')->name('roles_list')->middleware('auth','RoleAuth');
+Route::resource('roles', 'RolesController')->middleware('auth','RoleAuth');
 
+    

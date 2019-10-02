@@ -12,6 +12,18 @@ class PermissionTableSeeder extends Seeder
      *
      * @return void
      */
+    
+    public function get_string_between($string, $start, $end){
+    $string = ' ' . $string;
+    $ini = strpos($string, $start);
+    if ($ini == 0) return '';
+    $ini += strlen($start);
+    $len = strpos($string, $end, $ini) - $ini;
+    return substr($string, $ini, $len);
+}
+
+
+
     public function run()
     {
        $permission_ids = []; // an empty array of stored permission IDs
@@ -39,6 +51,36 @@ foreach (Route::getRoutes()->getRoutes() as  $route)
    $permission_ids[] = $permission->id;
  }
 }
+
+//naming permissionsfor
+
+foreach ($permission_ids as $permission_id)
+{
+    $permissionById =  Permission::find($permission_id);
+    if(in_array($permissionById->method, ['index','show']))
+    {
+     
+        $permissionById->name = strtolower($this->get_string_between($permissionById->controller, 'Controllers\\', 'sController'))."s_list";
+        $permissionById->save();       
+        }elseif(in_array($permissionById->method, ['create','store']))
+        {
+     
+        $permissionById->name = strtolower($this->get_string_between($permissionById->controller, 'Controllers\\', 'sController'))."s_create";
+        $permissionById->save();       
+        }elseif(in_array($permissionById->method, ['edit','update']))
+        {
+     
+        $permissionById->name = strtolower($this->get_string_between($permissionById->controller, 'Controllers\\', 'sController'))."s_edit";
+        $permissionById->save();       
+        }elseif(in_array($permissionById->method, ['destroy']))
+        {
+     
+        $permissionById->name = strtolower($this->get_string_between($permissionById->controller, 'Controllers\\', 'sController'))."s_delete";
+        $permissionById->save();       
+        }         
+     
+}
+
 // find admin role.
 $admin_role = Role::where('name','admin')->first();
 // atache all permissions to admin role

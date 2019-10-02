@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use Illuminate\Http\Request;
+use App\User;
+use App\Permission;
 
 class RolesController extends Controller
 {
@@ -58,10 +60,11 @@ class RolesController extends Controller
      */
     public function edit(Role $role)
     {
-        $roles = Role::all();
+        $roles = Role::all()->toArray();
+        $actions = ['list','create','edit','delete'];
+        $names = ['users','roles'];
         
-        
-        return view('roles_edit',['roles'=>$roles]); 
+        return view('roles_edit',['names'=>$names ,'actions'=>$actions ,'role'=>$role]); 
     }
 
     /**
@@ -73,7 +76,29 @@ class RolesController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $role->permissions()->detach();
+        
+        if ($request->has('actions'))
+        {
+        foreach($request->actions as $action)
+        {
+          
+            $permissions = Permission::where('name','=',$action)->get();
+            foreach($permissions as $permission)
+            {
+                if(!$role->permissions->contains('name',$permission->name)){
+                $role->permissions()->attach($permission);
+                $role->save();
+                }
+                
+               
+            }
+            
+            
+        }
+        }
+        
+         return redirect('/roles/list')->with(['success'=>'The role has been successfully updated']);
     }
 
     /**
