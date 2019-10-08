@@ -109,6 +109,7 @@ class RolesController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        return redirect('/roles/list')->with(['success'=>'The role has been deleted updated']);
     }
 }

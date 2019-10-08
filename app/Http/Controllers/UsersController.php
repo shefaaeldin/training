@@ -93,7 +93,8 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect('/users/list')->with(['success'=>'User\'s profile has been successfully deleted']);
     }
     
     

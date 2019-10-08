@@ -2,6 +2,8 @@
 
 use App\Role;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,5 +25,7 @@ Route::get('/users/list', 'UsersController@index')->name('users_list')->middlewa
 Route::resource('users', 'UsersController')->middleware('auth','RoleAuth');
 Route::get('/roles/list', 'RolesController@index')->name('roles_list')->middleware('auth','RoleAuth');
 Route::resource('roles', 'RolesController')->middleware('auth','RoleAuth');
+Route::get('ajax/users', 'Ajax\UsersDataController@index')->name('ajax.users.index');
+Route::get('ajax/roles', 'Ajax\RolesDataController@index')->name('ajax.roles.index');
 
     
