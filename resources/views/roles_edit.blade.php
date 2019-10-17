@@ -29,7 +29,7 @@
                         <td class = "{{$name}}_all"><input type="checkbox" ></td>
                         <td>{{$name}}</td>
                         @foreach($actions as $action)
-                        <td class = "{{$name}}_{{$action}}}"><input type="checkbox" name="actions[]" {{$role->permissions->contains(\App\Permission::where("name","=",$name."_".$action)->first())? "checked" : ""}} value="{{$name}}_{{$action}}" ></td>
+                        <td class = "{{$name}}_{{$action}}}"><input type="checkbox" name="actions[]" {{$role->permissions->contains(\App\Permission::where("name","=",$action." ".$name)->first())? "checked" : ""}} value="{{$action}} {{$name}}" ></td>
                         @endforeach
                          
                        

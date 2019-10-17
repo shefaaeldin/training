@@ -76,7 +76,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
-            'role_id' => \App\Role::where('name','customer')->first()->id,
+            
         ]);
     }
     
@@ -84,5 +84,6 @@ class RegisterController extends Controller
     {
 
         Mail::to($user->email)->send(new \App\Mail\WelcomeEmail($user)); 
+        $user->assignRole('user');
     }
 }

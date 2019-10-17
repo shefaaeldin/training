@@ -54,7 +54,7 @@
     <script>
        
         
-        $(document).ready( function () {
+  $(document).ready( function () {
   $('#demo_table').DataTable({
     "processing": true,
     "serverSide": true,

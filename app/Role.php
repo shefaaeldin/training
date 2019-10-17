@@ -2,19 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Role as SpatieRole;
 
-class Role extends Model
+class Role extends SpatieRole
 {
-    protected $table = 'roles';
+   
+
+   
+
     
-      public function permissions()
-    {
-        return $this->belongsToMany('App\Permission');
-    }
-    
-      public function user()
-    {
-        return $this->hasMany('App\User');
-    }
 }

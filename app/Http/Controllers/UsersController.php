@@ -13,8 +13,16 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+     public function __construct()
+    {
+        $this->authorizeResource(User::class,'user');
+    } 
+    
+    
     public function index()
     {
+        
         $users = User::all();
         return view('users_list',compact('users',$users));  
     }

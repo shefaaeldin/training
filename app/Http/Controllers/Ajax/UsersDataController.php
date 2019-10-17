@@ -11,7 +11,7 @@ class UsersDataController extends Controller
     public function index() {
     return Datatables::of(User::query())
         ->addColumn('role', function($row){
-            return $row->role->name;
+            return $row->getRoleNames()->first();
         })
         ->addColumn('name', function($row){
             return $row->first_name." ".$row->last_name;

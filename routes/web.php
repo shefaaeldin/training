@@ -1,6 +1,12 @@
 <?php
 
-use App\Role;
+
+use Spatie\Permission\Models\Role;
+use App\Permission;
+use App\User;
+
+
+
 
 
 
@@ -20,12 +26,13 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/users/list', 'UsersController@index')->name('users_list')->middleware('auth','RoleAuth');
-Route::resource('users', 'UsersController')->middleware('auth','RoleAuth');
-Route::get('/roles/list', 'RolesController@index')->name('roles_list')->middleware('auth','RoleAuth');
-Route::resource('roles', 'RolesController')->middleware('auth','RoleAuth');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/users/list', 'UsersController@index')->name('users_list');
+Route::resource('users', 'UsersController');
+Route::get('/roles/list', 'RolesController@index')->name('roles_list');
+Route::resource('roles', 'RolesController');
 Route::get('ajax/users', 'Ajax\UsersDataController@index')->name('ajax.users.index');
 Route::get('ajax/roles', 'Ajax\RolesDataController@index')->name('ajax.roles.index');
+
 
     

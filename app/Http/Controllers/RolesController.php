@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use App\User;
-use App\Permission;
+
 
 class RolesController extends Controller
 {
@@ -14,6 +15,12 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+    {
+        $this->authorizeResource(Role::class, 'role');
+    }
+    
+    
     public function index()
     {
          $roles = Role::all();
@@ -60,8 +67,9 @@ class RolesController extends Controller
      */
     public function edit(Role $role)
     {
+        
         $roles = Role::all()->toArray();
-        $actions = ['list','create','edit','delete'];
+        $actions = ['view','create','edit','delete'];
         $names = ['users','roles'];
         
         return view('roles_edit',['names'=>$names ,'actions'=>$actions ,'role'=>$role]); 
@@ -76,24 +84,16 @@ class RolesController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        $role->permissions()->detach();
+       
+       // $role->permissions()->detach();
+        $allPermissions = Permission::all();
+        $role->revokePermissionTo($allPermissions);
         
         if ($request->has('actions'))
         {
         foreach($request->actions as $action)
         {
-          
-            $permissions = Permission::where('name','=',$action)->get();
-            foreach($permissions as $permission)
-            {
-                if(!$role->permissions->contains('name',$permission->name)){
-                $role->permissions()->attach($permission);
-                $role->save();
-                }
-                
-               
-            }
-            
+            $role->givePermissionTo($action);
             
         }
         }
