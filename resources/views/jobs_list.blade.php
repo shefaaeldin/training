@@ -8,20 +8,20 @@
                  {{ session('success') }}
                  </div>
                 @endif
-                <div class="col-lg-10">
-                    <h2>Roles list</h2>
-                    <ol class="breadcrumb">
+                <div class="col-lg-10" style="padding: 20px; ">
+                    <h2 style = "display:inline;">Jobs list</h2>
+                     <a href="{{ route('jobs.create') }}"><button type="button" class="btn btn-primary" style = "float:right">Create a new Job</button></a>
+                    <ol class="breadcrumb" style = "margin-top: 20px;">
                         <li>
                             <a href="/home">Home</a>
                         </li>
                         <li class="active">
-                            <strong>Roles</strong>
+                            <strong>Jobs</strong>
                         </li>
                     </ol>
                 </div>
-                <div class="col-lg-2">
-
-                </div>
+                 
+              
             </div>
         
                     <div class="ibox-content">
@@ -31,8 +31,9 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Actions</th>
+                        <th>Title</th>
+                         <th>Description</th>
+                         <th>Actions</th>
                     </tr>
                     </thead>
               
@@ -53,16 +54,17 @@
   $('#demo_table').DataTable({
     "processing": true,
     "serverSide": true,
-    "ajax": '{{ route('ajax.roles.index') }}',
+    "ajax": '{{ route('ajax.jobs.index') }}',
     "columns": [
       { "data": "id" },
-      { "data": "name" },   
+      { "data": "title" },   
+      { "data": "description" },
      { data: null,
           "orderable":      false,
           "searchable":     false,
   render: function(data){
-    var edit_button = '<a href="' + data.edit_role + '" class="btn btn-primary" role="button" aria-pressed="true">Edit</a>';
-    var delete_button = '<form style = "display:inline;" action="' + data.delete_role + '" method="POST"><input type="hidden" name="_method" value="delete">@csrf @method('delete')<button type="submit" class="btn btn-danger">Delete</button>';
+    var edit_button = '<a href="' + data.edit_job + '" class="btn btn-primary" role="button" aria-pressed="true">Edit</a>';
+    var delete_button = '<form style = "display:inline;" action="' + data.delete_job + '" method="POST"><input type="hidden" name="_method" value="delete">@csrf @method('delete')<button type="submit" class="btn btn-danger">Delete</button>';
     return edit_button + delete_button;
   }
      }

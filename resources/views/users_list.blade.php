@@ -66,6 +66,8 @@
       { "data": "phone" },
       { "data": "role" },
       { data: null,
+           "orderable":      false,
+          "searchable":     false,
   render: function(data){
     var edit_button = '<a href="' + data.edit_user + '" class="btn btn-primary" role="button" aria-pressed="true">Edit</a>';
     var delete_button = '<form style = "display:inline;" action="' + data.delete_user + '" method="POST"><input type="hidden" name="_method" value="delete">@csrf @method('delete')<button type="submit" class="btn btn-danger">Delete</button>';

@@ -70,7 +70,7 @@ class RolesController extends Controller
         
         $roles = Role::all()->toArray();
         $actions = ['view','create','edit','delete'];
-        $names = ['users','roles'];
+        $names = ['users','roles','jobs'];
         
         return view('roles_edit',['names'=>$names ,'actions'=>$actions ,'role'=>$role]); 
     }

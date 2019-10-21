@@ -26,6 +26,7 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/users/list', 'UsersController@index')->name('users_list');
 Route::resource('users', 'UsersController');
@@ -33,6 +34,12 @@ Route::get('/roles/list', 'RolesController@index')->name('roles_list');
 Route::resource('roles', 'RolesController');
 Route::get('ajax/users', 'Ajax\UsersDataController@index')->name('ajax.users.index');
 Route::get('ajax/roles', 'Ajax\RolesDataController@index')->name('ajax.roles.index');
+Route::get('ajax/jobs', 'Ajax\jobsDataController@index')->name('ajax.jobs.index');
+Route::get('/jobs/list', 'jobController@index')->name('jobs_list');
+Route::resource('jobs', 'JobController');
+
+
+
 
 
     

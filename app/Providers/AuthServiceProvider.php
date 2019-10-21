@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Role;
 use App\User;
+use App\Job;
 use App\Policies\UserPolicy;
 use App\Policies\RolePolicy;
+use App\Policies\JobPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,7 +21,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
         User::class => UserPolicy::class,
-       Role::class => RolePolicy::class,
+        Role::class => RolePolicy::class,
+        Job::class => JobPolicy::class,
     ];
 
     /**
