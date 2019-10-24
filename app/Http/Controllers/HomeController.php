@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use PragmaRX\Countries\Package\Countries;
 
 class HomeController extends Controller
 {
@@ -24,5 +26,16 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    
+    public function countries()
+
+    {
+
+        $countries = Countries::all();
+        dd($countries['EGY']);
+
+        return view('countries',compact('countries'));
+
     }
 }

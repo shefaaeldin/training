@@ -35,8 +35,13 @@ Route::resource('roles', 'RolesController');
 Route::get('ajax/users', 'Ajax\UsersDataController@index')->name('ajax.users.index');
 Route::get('ajax/roles', 'Ajax\RolesDataController@index')->name('ajax.roles.index');
 Route::get('ajax/jobs', 'Ajax\jobsDataController@index')->name('ajax.jobs.index');
-Route::get('/jobs/list', 'jobController@index')->name('jobs_list');
+Route::get('ajax/cities', 'Ajax\CityDataController@index')->name('ajax.city.index');
+Route::get('/jobs/list', 'JobController@index')->name('jobs_list');
 Route::resource('jobs', 'JobController');
+Route::get('/city/list', 'CityController@index')->name('city_list');
+Route::resource('city', 'CityController');
+Route::get('/countries', 'HomeController@countries');
+
 
 
 

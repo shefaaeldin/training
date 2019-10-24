@@ -65,7 +65,7 @@
                     <a href="{{route('jobs_list')}}" ><i class="fa fa-envelope"></i><span class="nav-label">Jobs</span></a>
                 </li>
                 <li>
-                    <a href="{{route('jobs_list')}}" ><i class="fa fa-envelope"></i><span class="nav-label">Cities</span></a>
+                    <a href="{{route('city_list')}}" ><i class="fa fa-envelope"></i><span class="nav-label">Cities</span></a>
                 </li>
             </ul>
 

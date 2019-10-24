@@ -3,17 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/assignment3/resources/views/layouts/dashboard.blade.php</file>
-            <file>file:/C:/xampp/htdocs/assignment3/database/migrations/2019_10_20_120354_create_jobs_table.php</file>
-            <file>file:/C:/xampp/htdocs/assignment3/app/Http/Controllers/Ajax/JobsDatacontroller.php</file>
-            <file>file:/C:/xampp/htdocs/assignment3/resources/views/roles_list.blade.php</file>
             <file>file:/C:/xampp/htdocs/assignment3/routes/web.php</file>
-            <file>file:/C:/xampp/htdocs/assignment3/app/Http/Controllers/Controller.php</file>
-            <file>file:/C:/xampp/htdocs/assignment3/app/Http/Controllers/Auth/RegisterController.php</file>
-            <file>file:/C:/xampp/htdocs/assignment3/app/Http/Controllers/RolesController.php</file>
-            <file>file:/C:/xampp/htdocs/assignment3/app/Http/Controllers/JobController.php</file>
-            <file>file:/C:/xampp/htdocs/assignment3/app/Job.php</file>
-            <file>file:/C:/xampp/htdocs/assignment3/app/Http/Controllers/HomeController.php</file>
         </group>
     </open-files>
 </project-private>
