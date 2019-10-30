@@ -7,9 +7,11 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use App\Role;
 use App\User;
 use App\Job;
+use App\City;
 use App\Policies\UserPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\JobPolicy;
+use App\Policies\CityPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Role::class => RolePolicy::class,
         Job::class => JobPolicy::class,
+        City::class => CityPolicy::class,
     ];
 
     /**

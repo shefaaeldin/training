@@ -24,6 +24,10 @@ class PermissionSeeder extends Seeder
         ['name'=>'create jobs'],
         ['name'=>'edit jobs'],
         ['name'=>'delete jobs'],
+        ['name'=>'view cities'],
+        ['name'=>'create cities'],
+        ['name'=>'edit cities'],
+        ['name'=>'delete cities'],
         
     ];
     

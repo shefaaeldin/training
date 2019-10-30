@@ -13,6 +13,13 @@ class CityController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    
+       public function __construct()
+    {
+       $this->authorizeResource(City::class, 'city');
+    }
+    
+    
     public function index() {
         return view('city_list');
     }

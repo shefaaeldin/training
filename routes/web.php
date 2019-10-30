@@ -36,11 +36,15 @@ Route::get('ajax/users', 'Ajax\UsersDataController@index')->name('ajax.users.ind
 Route::get('ajax/roles', 'Ajax\RolesDataController@index')->name('ajax.roles.index');
 Route::get('ajax/jobs', 'Ajax\jobsDataController@index')->name('ajax.jobs.index');
 Route::get('ajax/cities', 'Ajax\CityDataController@index')->name('ajax.city.index');
+Route::get('ajax/profiles', 'Ajax\ProfileDataController@index')->name('ajax.profile.index');
+Route::get('ajax/countries', 'Ajax\ProfileDataController@countries')->name('ajax.countries.index');
 Route::get('/jobs/list', 'JobController@index')->name('jobs_list');
 Route::resource('jobs', 'JobController');
 Route::get('/city/list', 'CityController@index')->name('city_list');
 Route::resource('city', 'CityController');
 Route::get('/countries', 'HomeController@countries');
+Route::get('/profiles/list', 'ProfileController@index')->name('staff_list');
+Route::resource('profile', 'ProfileController');
 
 
 
