@@ -4,7 +4,7 @@
 
 
 
-<form method="post" class="form-horizontal" action="/profile/{{$profile->id}}">
+    <form method="post" class="form-horizontal" action="{{route('profile.update',$profile->id)}}" enctype='multipart/form-data'>
     @csrf
     @method('PUT')
     <div class="form-group" style="margin-top:20px;"><label class="col-sm-2 control-label">First name</label>
@@ -76,15 +76,19 @@
             @endif
         </div>
     </div>
+    
+    
+    
 
     <div class="hr-line-dashed"></div>
-    <div class="form-group"><label class="col-sm-2 control-label">Role</label>
+    <div class="form-group"><label class="col-sm-2 control-label">Gender</label>
 
-        <div class="col-sm-10"><select class="form-control m-b" name="account">
+        <div class="col-sm-10"><select class="form-control m-b" name="gender">
 
-                @foreach($roles as $role)
-                <option>{{$role->name}}</option>
-                @endforeach
+               
+                <option value = "male">male</option>
+                  <option value = "female">male</option>
+               
             </select>
 
 

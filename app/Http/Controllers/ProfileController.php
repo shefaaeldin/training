@@ -11,6 +11,9 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Role;
+use App\Http\Requests\UpdateProfileRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ChangePasswordEmail;
 
 class ProfileController extends Controller
 {
@@ -60,7 +63,7 @@ class ProfileController extends Controller
             'country' => 'required|string|max:150|min:2',
             'city' => 'required|string|max:150|min:2',
             'gender' => 'required',
-            'profile_image'=>'mimes:jpg,png|image|max:2000',
+            'profile_image'=>'mimes:png,JPG|image|max:2000',
         ]);
         
         $user= User::create([
@@ -82,8 +85,9 @@ class ProfileController extends Controller
        // dd(asset($image_path));
         $profile->photo = $image_path;
         $profile->save();
-        dd($profile->photo);
         //dd(asset('storage/'.$image_path));
+        
+        Mail::to($user->email)->send(new ChangePasswordEmail($profile)); 
         return redirect('/profiles/list')->with(['success'=>'The Staff member has been successfully created']); 
         
        
@@ -124,9 +128,32 @@ class ProfileController extends Controller
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
+    public function update(UpdateProfileRequest $request, Profile $profile)
     {
-        //
+ 
+            $profile->user->update([
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+        ]);
+            
+              $profile->update([
+            'country' => $request['country'],
+            'city' => $request['city'],
+            'gender' => $request['gender'],
+           
+        ]);
+            
+            if($request['profile_image']=!NULL)
+            {
+            $image_path =  $request['profile_image']->store('avatars');
+            $profile->photo = $image_path;
+            $profile->save();
+            }
+      
+            
+            return redirect('/profiles/list')->with(['success'=>'The Staff member profile has been successfully updated']);
     }
 
     /**
@@ -137,6 +164,12 @@ class ProfileController extends Controller
      */
     public function destroy(Profile $profile)
     {
-        //
+        $profile->user->delete();
+        return redirect('/profiles/list')->with(['success'=>'The Staff member profile has been successfully deleted']);
+    }
+    
+    public function changePassword(Profile $profile,$token)
+    {
+        dd(uniqid());
     }
 }
