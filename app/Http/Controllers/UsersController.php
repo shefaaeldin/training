@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Role;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -103,6 +104,35 @@ class UsersController extends Controller
     {
         $user->delete();
         return redirect('/users/list')->with(['success'=>'User\'s profile has been successfully deleted']);
+    }
+    
+    
+      public function changePasswordView(User $user)
+    {
+         return view('change_password',['user'=>$user]); 
+    }
+    
+      public function changePassword(User $user , Request $request)
+    {
+         
+          $request->validate([
+            'password' => 'required|string|min:8|alpha_num|confirmed|regex:/[a-zA-Z]/|regex:/\d/',
+        ]);
+          
+         if($user->is_password_changed==0) 
+         {
+             $user->update(['password' => Hash::make($request['password'])]);
+             $user->is_password_changed= 1;
+             $user->save();
+             return redirect('/login')->with(['success'=>'Your password has been successfully changed']);
+             
+         }
+         else
+         {
+             return redirect('/login')->with(['warning'=>'Your password has been already changed before']);
+         }
+        
+        
     }
     
     

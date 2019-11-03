@@ -3,8 +3,9 @@
 
 Welcome {{$profile->user->first_name}} {{$profile->user->last_name}}
 
-@component('mail::button', ['url' => ''])
-Button Text
+Please visit this link to change your password
+@component('mail::button', ['url' => url('/users/changepassword/'.$profile->user->id)])
+Change Password
 @endcomponent
 
 Thanks,<br>

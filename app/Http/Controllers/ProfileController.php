@@ -168,8 +168,5 @@ class ProfileController extends Controller
         return redirect('/profiles/list')->with(['success'=>'The Staff member profile has been successfully deleted']);
     }
     
-    public function changePassword(Profile $profile,$token)
-    {
-        dd(uniqid());
-    }
+   
 }

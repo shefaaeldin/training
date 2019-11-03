@@ -44,7 +44,8 @@ Route::get('/city/list', 'CityController@index')->name('city_list');
 Route::resource('city', 'CityController');
 Route::get('/countries', 'HomeController@countries');
 Route::get('/profiles/list', 'ProfileController@index')->name('staff_list');
-Route::get('/profiles/changepassword/{profile}/{token}', 'ProfileController@changePassword')->name('profile_changepassword');
+Route::get('/users/changepassword/{user}', 'UsersController@changePasswordView')->name('user_changepassword_view');
+Route::put('/users/changepassword/{user}', 'UsersController@changePassword')->name('user_changepassword');
 Route::resource('profile', 'ProfileController');
 
 

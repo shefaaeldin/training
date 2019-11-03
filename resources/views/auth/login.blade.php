@@ -10,6 +10,18 @@
 <body class="gray-bg">
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
+        
+          @if (session('success'))
+                 <div class="alert alert-success" role="alert" style="margin-top: 20px;">
+                 {{ session('success') }}
+                 </div>
+                @endif
+                
+                @if (session('warning'))
+                 <div class="alert alert-warning" role="alert" style="margin-top: 20px;">
+                 {{ session('warning') }}
+                 </div>
+                @endif
         <div>
             <div>
 
