@@ -11,6 +11,9 @@ class PermissionSeeder extends Seeder
      * @return void
      */
     public function run(){
+        
+    DB::statement('SET FOREIGN_KEY_CHECKS=0;');  
+    DB::table('permissions')->truncate();
     $permissions = [
         ['name'=>'view users'],
         ['name'=>'edit users'],
@@ -28,9 +31,10 @@ class PermissionSeeder extends Seeder
         ['name'=>'create cities'],
         ['name'=>'edit cities'],
         ['name'=>'delete cities'],
-        
     ];
     
+     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+     
     foreach ($permissions as $permission)
     {
         Permission::create($permission);

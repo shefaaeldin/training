@@ -11,6 +11,8 @@
                 <div class="col-lg-10">
                     <h2>Users list</h2>
                     <ol class="breadcrumb">
+                        
+                     <a href="{{ route('users.create') }}"><button type="button" class="btn btn-primary" style = "float:right">Create a new User</button></a>
                         <li>
                             <a href="/home">Home</a>
                         </li>
@@ -35,6 +37,9 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Role</th>
+                        <th>Country</th>
+                        <th>City</th>
+                        <th>Gender</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -65,6 +70,9 @@
       { "data": "email" },
       { "data": "phone" },
       { "data": "role" },
+      { "data": "country" },
+      { "data": "city" },
+      { "data": "gender" },
       { data: null,
            "orderable":      false,
           "searchable":     false,

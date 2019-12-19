@@ -8560,3 +8560,15 @@ body.md-skin {
     margin: 0;
   }
 }
+
+.ck-content {
+  min-height:400px;
+ 
+}
+
+.ck-media__wrapper
+{
+  max-height:400px;  
+  max-width:400px; 
+  
+}

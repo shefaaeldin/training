@@ -89,7 +89,7 @@
     
     
 <div class="form-group" style="margin-top:20px;"><label class="col-sm-2 control-label">Profile image</label>
-        <div class="col-sm-10"><input type="file" class="form-control" name="profile_image" value="{{old('profile_image')}}"> 
+        <div class="col-sm-10"><input type="file" class="dropzone form-control" name="profile_image" value="{{old('profile_image')}}"> 
             @if($errors->has('profile_image'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{$errors->first('profile_image')}}</strong>

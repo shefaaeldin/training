@@ -17,11 +17,11 @@ class ChangePasswordEmail extends Mailable
      * @return void
      */
     
-    public $profile;
+    public $user;
     
-    public function __construct($profile)
+    public function __construct($user)
     {
-        $this->profile=$profile;
+        $this->user=$user;
        
     }
 
@@ -32,6 +32,6 @@ class ChangePasswordEmail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.welcome.profile',['profile' => $this->profile]);
+        return $this->markdown('emails.welcome.profile',['profile' => $this->user]);
     }
 }

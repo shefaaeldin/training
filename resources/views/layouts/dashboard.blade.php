@@ -14,11 +14,13 @@
         <link href="{{asset('styles/css/plugins/iCheck/custom.css')}}" rel="stylesheet">
         <link href="{{asset('styles/css/animate.css')}}" rel="stylesheet">
         <link href="{{asset('styles/css/style.css')}}" rel="stylesheet">
+        <link href="{{asset('styles/dist/dropzone.css')}}" rel="stylesheet">
 
 
         <!-- Datatables scripts -->
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+        
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 
@@ -69,6 +71,9 @@
                         </li>
                         <li>
                             <a href="{{route('staff_list')}}" ><i class="fa fa-envelope"></i><span class="nav-label">Staff Members</span></a>
+                        </li>
+                        <li>
+                            <a href="{{route('news.index')}}" ><i class="fa fa-envelope"></i><span class="nav-label">News</span></a>
                         </li>
                     </ul>
 
@@ -206,16 +211,9 @@
 
     </body>
 
-    <div class="footer">
-        <div class="pull-right">
-            10GB of <strong>250GB</strong> Free.
-        </div>
-        <div>
-            <strong>Copyright</strong> Example Company &copy; 2014-2017
-        </div>
-    </div>
+ 
 
-@yield('scripts')
+
 <!-- Mainly scripts -->
 <script src="{{asset('styles/js/jquery-3.1.1.min.js')}}"></script>
 <script src="{{asset('styles/js/bootstrap.min.js')}}"></script>
@@ -228,4 +226,5 @@
 <script src="{{asset('styles/js/inspinia.js')}}"></script>
 <script src="{{asset('styles/js/plugins/pace/pace.min.js')}}"></script>
 
+@yield('scripts')
 </html>

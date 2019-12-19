@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Job;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 
 class JobController extends Controller
@@ -20,9 +21,14 @@ class JobController extends Controller
     }
     
     
-    public function index()
-    {
-        return view('jobs_list'); 
+    public function index(Request $request) {
+
+        if ($request->ajax()) {
+            
+            Return $this->getJobData();
+        }
+
+        return view('jobs_list');
     }
 
     /**
@@ -106,5 +112,17 @@ class JobController extends Controller
     {
         $job->delete();
         return redirect('/jobs/list')->with(['success'=>'The job has been successfully deleted']);
+    }
+    
+      public function getJobData() {
+
+        return Datatables::of(Job::query())
+            ->addColumn('delete_job', function($row){
+            return route("jobs.destroy",$row->id);
+        })
+         ->addColumn('edit_job', function($row){
+            return route("jobs.edit",$row->id);
+        })
+        ->make(true);
     }
 }

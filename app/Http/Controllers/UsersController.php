@@ -6,6 +6,12 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Role;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
+use PragmaRX\Countries\Package\Countries;
+use App\City;
+use App\Http\Requests\StoreUser;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ChangePasswordEmail;
 
 class UsersController extends Controller
 {
@@ -21,11 +27,16 @@ class UsersController extends Controller
     } 
     
     
-    public function index()
+       public function index(Request $request)
     {
+         //dd(asset('storage/avatars/dQzYBt9HEekY4b1m6uQt6aZlim4k55mSHrGXzmh4.png'));
         
-        $users = User::all();
-        return view('users_list',compact('users',$users));  
+           if ($request->ajax()) {
+            
+            Return $this->getUserData();
+        }
+
+        return view('users_list');
     }
 
     /**
@@ -35,7 +46,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $countries = Countries::all();
+         $cities = City::all();
+        return view('user_create', ['countries' => $countries,'cities'=>$cities]);
     }
 
     /**
@@ -44,9 +57,21 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $request)
     {
-        //
+            
+        $user = User::create($request->except(['profile_image']));
+        
+        if($request['profile_image'])
+        {
+        $image_path =  $request['profile_image']->store('avatars');
+        $user->photo = $image_path;
+        $user->save();
+        }
+       
+        
+        Mail::to($user->email)->send(new ChangePasswordEmail($user)); 
+        return redirect('/users/list')->with(['success'=>'The Staff member has been successfully created']); 
     }
 
     /**
@@ -133,6 +158,24 @@ class UsersController extends Controller
          }
         
         
+    }
+    
+      public function getUserData(){
+
+        return Datatables::of(User::query())
+        ->addColumn('role', function($row){
+            return $row->getRoleNames()->first();
+        })
+        ->addColumn('name', function($row){
+            return $row->first_name." ".$row->last_name;
+        })
+        ->addColumn('delete_user', function($row){
+            return route("users.destroy",$row->id);
+        })
+         ->addColumn('edit_user', function($row){
+            return route("users.edit",$row->id);
+        })
+        ->make(true);
     }
     
     

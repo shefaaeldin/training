@@ -14,6 +14,7 @@ use App\Role;
 use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ChangePasswordEmail;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProfileController extends Controller
 {
@@ -22,12 +23,18 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
          //dd(asset('storage/avatars/dQzYBt9HEekY4b1m6uQt6aZlim4k55mSHrGXzmh4.png'));
-        $profiles = Profile::all();
-        return view('staff_list',compact('profiles',$profiles)); 
+        
+           if ($request->ajax()) {
+            
+            Return $this->getProfileData();
+        }
+
+        return view('staff_list');
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -77,15 +84,16 @@ class ProfileController extends Controller
         
         $user->assignRole('user');
         
-        $profileData['user_id']=$user->id;
-        $profile = Profile::create($profileData);
+         $profileData['user_id']=$user->id;
+         $profile = Profile::create($profileData);
+        
+        if($request['profile_image'])
+        {
         $image_path =  $request['profile_image']->store('avatars');
-       // $file = $request->file('profile_image');
-       // Storage::put('name',$file);
-       // dd(asset($image_path));
         $profile->photo = $image_path;
         $profile->save();
-        //dd(asset('storage/'.$image_path));
+        }
+       
         
         Mail::to($user->email)->send(new ChangePasswordEmail($profile)); 
         return redirect('/profiles/list')->with(['success'=>'The Staff member has been successfully created']); 
@@ -166,6 +174,28 @@ class ProfileController extends Controller
     {
         $profile->user->delete();
         return redirect('/profiles/list')->with(['success'=>'The Staff member profile has been successfully deleted']);
+    }
+    
+      public function countries(Request $request) {
+
+    $cities = City::where('country','=',$request['country'])->get();
+    
+        return $cities;
+    }
+    
+    public function getProfileData(){
+
+        return Datatables::of(Profile::query())
+                        ->addColumn('name', function($row) {
+                            return $row->user->first_name . " " . $row->user->last_name;
+                        })
+                        ->addColumn('delete_profile', function($row) {
+                            return route("profile.destroy", $row->id);
+                        })
+                        ->addColumn('edit_profile', function($row) {
+                            return route("profile.edit", $row->id);
+                        })
+                        ->make(true);
     }
     
    

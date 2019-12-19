@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\City;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
+use Yajra\DataTables\Facades\DataTables;
 
 class CityController extends Controller {
 
@@ -13,14 +14,17 @@ class CityController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    
-       public function __construct()
-    {
-       $this->authorizeResource(City::class, 'city');
+    public function __construct() {
+        $this->authorizeResource(City::class, 'city');
     }
-    
-    
-    public function index() {
+
+    public function index(Request $request) {
+
+        if ($request->ajax()) {
+            
+            Return $this->getCityData();
+        }
+
         return view('city_list');
     }
 
@@ -97,6 +101,18 @@ class CityController extends Controller {
     public function destroy(City $city) {
         $city->delete();
         return redirect('/city/list')->with(['success' => 'The city has been successfully deleted']);
+    }
+
+    public function getCityData() {
+
+        return Datatables::of(city::query())
+                        ->addColumn('delete_city', function($row) {
+                            return route("city.destroy", $row->id);
+                        })
+                        ->addColumn('edit_city', function($row) {
+                            return route("city.edit", $row->id);
+                        })
+                        ->make(true);
     }
 
 }

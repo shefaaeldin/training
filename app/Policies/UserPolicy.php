@@ -16,6 +16,8 @@ class UserPolicy
      * @param  \App\User  $model
      * @return mixed
      */
+    
+   
     public function view(User $user)
     {
         if($user->roles->first()->name=='admin')
@@ -40,9 +42,10 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        
+              
         if($user->roles->first()->name=='admin')
         {
+            
             return true;
         
         }
@@ -51,6 +54,7 @@ class UserPolicy
             return true;
         }
         else{
+           
             return false;
         }
     }
@@ -87,6 +91,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
+    
         if($user->roles->first()->name=='admin')
         {
             return true;

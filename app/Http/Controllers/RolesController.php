@@ -6,6 +6,7 @@ use App\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use App\User;
+use  Yajra\DataTables\Facades\DataTables;
 
 
 class RolesController extends Controller
@@ -21,10 +22,16 @@ class RolesController extends Controller
     }
     
     
-    public function index()
+       public function index(Request $request)
     {
-         $roles = Role::all();
-        return view('roles_list',compact('roles',$roles)); 
+         //dd(asset('storage/avatars/dQzYBt9HEekY4b1m6uQt6aZlim4k55mSHrGXzmh4.png'));
+        
+           if ($request->ajax()) {
+            
+            Return $this->getRoleData();
+        }
+
+        return view('roles_list');
     }
 
     /**
@@ -111,5 +118,17 @@ class RolesController extends Controller
     {
         $role->delete();
         return redirect('/roles/list')->with(['success'=>'The role has been deleted updated']);
+    }
+    
+    public function getRoleData(){
+
+        return Datatables::of(Role::query())
+        ->addColumn('delete_role', function($row){
+            return route("roles.destroy",$row->id);
+        })
+         ->addColumn('edit_role', function($row){
+            return route("roles.edit",$row->id);
+        })
+        ->make(true);
     }
 }
