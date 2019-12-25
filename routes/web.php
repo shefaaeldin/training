@@ -27,7 +27,8 @@ Route::get('/', 'HomeController@index');
 Auth::routes();
 
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('auth');
 Route::get('/users/list', 'UsersController@index')->name('users_list');
 Route::resource('users', 'UsersController');
 Route::get('/roles/list', 'RolesController@index')->name('roles_list');
@@ -54,6 +55,8 @@ Route::get('ajax/authors', 'NewsController@getAuthors')->name('ajax.authors.inde
 Route::post('/storemedia', 'NewsController@storeMedia')->name('store.media');
 Route::get('ajax/relatedimages/{id}', 'NewsController@getRelatedImages')->name('ajax.relatedimages.index');
 Route::delete('ajax/deleteimage/{id}', 'NewsController@deleteimage')->name('ajax.deleteimage.index');  
+Route::resource('category', 'CategoryController');
+Route::resource('tag', 'TagController');
 
 
 

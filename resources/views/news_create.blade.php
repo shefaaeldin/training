@@ -109,6 +109,27 @@
             @endif   
         </div>
     </div>
+    
+    
+    <div class="hr-line-dashed"></div>
+    <div class="form-group"><label class="col-sm-2 control-label">Category</label>
+        <div class="col-sm-10"> 
+
+            <select type="text" class="multiselect" multiple="multiple" role="multiselect" name='category[]' id='category' style="width:30%;"> 
+                
+                @foreach($categories as $category)
+                <option value = "{{$category->id}}">{{$category->name}}</option>
+              @endforeach
+              
+            </select>
+
+            @if ($errors->has('category'))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('category')}}</strong>
+            </span>
+            @endif   
+        </div>
+    </div>
 
 
     <div class="hr-line-dashed"></div>
@@ -843,7 +864,7 @@
                             $("#related-news").append('<option>new option</option>');
                             $.each(res, function (key, newsObj) {
                                 console.log(newsObj.main_title);
-                                $("#related_news").append('<option value="' + newsObj.main_title + '">' + newsObj.main_title + '</option>');
+                                $("#related_news").append('<option value="' + newsObj.id + '">' + newsObj.main_title + '</option>');
                             });
                             console.log('here');
                             $("select[role='multiselect']").multiselect('rebuild');
@@ -873,7 +894,7 @@
                             $("#related-news").append('<option>new option</option>');
                             $.each(res, function (key, newsObj) {
                                 console.log(newsObj.main_title);
-                                $("#related_news").append('<option value="' + newsObj.main_title + '">' + newsObj.main_title + '</option>');
+                                $("#related_news").append('<option value="' + newsObj.id + '">' + newsObj.main_title + '</option>');
                             });
                             console.log('here');
                             $("select[role='multiselect']").multiselect('rebuild');

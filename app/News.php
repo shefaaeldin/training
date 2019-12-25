@@ -30,7 +30,10 @@ class News extends Model
     return $this->hasMany('App\Image', 'news_id');
 }
     
-    
+     public function categories()
+    {
+        return $this->belongsToMany('App\Category','category_news','news_id','category_id');
+    }
     
     
 }

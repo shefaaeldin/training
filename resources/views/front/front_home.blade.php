@@ -11,6 +11,15 @@
     <link href="{{asset('front_styles/css/slick.css')}}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a67dcd7468.js" crossorigin="anonymous"></script>
     <title>Home</title>
+    <style>
+       p{
+          
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    }
+    </style>
 </head>
 
 <body>
@@ -55,7 +64,7 @@
         <div class="collapse navbar-collapse order-4 order-md-2" id="navigation">
             <ul class="navbar-nav text-uppercase">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link active">home</a>
+                    <a href="/" class="nav-link active">home</a>
                 </li>
                 <li class="nav-item d-flex align-items-center">
                     <div class="d-flex">
@@ -65,19 +74,23 @@
                                data-offset="10,20">categories <i class="fas fa-chevron-down"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                                <a class="dropdown-item ml-0" href="#">SPORTS</a>
+                                
+                                  @foreach($categories as $category)
+                                             <a class="dropdown-item ml-0" href="#">{{$category->name}}</a>
+                                        @endforeach
+<!--                                <a class="dropdown-item ml-0" href="#">SPORTS</a>
                                 <a class="dropdown-item ml-0" href="#">SPACE</a>
                                 <a class="dropdown-item ml-0" href="#">POLITICS</a>
-                                <a class="dropdown-item ml-0" href="#">TECHNOLOGY</a>
+                                <a class="dropdown-item ml-0" href="#">TECHNOLOGY</a>-->
                             </div>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="#world" class="nav-link">world</a>
+                    <a href="#world" class="nav-link">News</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#blog" class="nav-link"> blog</a>
+                    <a href="#blog" class="nav-link"> Articles</a>
                 </li>
                 <li class="nav-item">
                     <a href="contact.html" class="nav-link"> contact</a>
@@ -106,51 +119,24 @@
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <a href="Details.html">
-                                <img src="{{asset('front_styles/img/roya-ann-miller-_T9A8yrMqHY-unsplash.jpg')}}" class="d-block w-100 mb-4">
-                                <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit</h3>
+                                <img src="{{asset('storage/'.$news[0]->images->first()->path)}}" class="d-block w-100 mb-4">
+                                <h3>{{$news[0]->main_title}}</h3>
                             </a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla
-                                et
-                                dictum interdum, nisi lorem egestas vitae scel erisque enim ligula venenatis dolor.
-                                Maecenas nisl est, ultrices nec
-                                congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc
-                                sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc
-                                venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida
-                                venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh
-                                tempor porta.
-                            </p>
+                            <p class='block-with-text'>{!!$news[0]->sub_title!!}</p>
                         </div>
                         <div class="carousel-item">
                             <a href="Details.html">
-                                <img src="{{asset('front_styles/img/ev-Thc9xjSu4dM-unsplash.jpg')}}" class="d-block w-100 mb-4">
-                                <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit</h3>
+                                <img src="{{asset('storage/'.$news[1]->images->first()->path)}}" class="d-block w-100 mb-4">
+                                <h3>{{$news[1]->main_title}}</h3>
                             </a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla
-                                et
-                                dictum interdum, nisi lorem egestas vitae scel erisque enim ligula venenatis dolor.
-                                Maecenas nisl est, ultrices nec
-                                congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc
-                                sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc
-                                venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida
-                                venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh
-                                tempor porta.
-                            </p>
+                           <p class='block-with-text'>{!!$news[1]->sub_title!!}</p>
                         </div>
                         <div class="carousel-item">
                             <a href="Details.html">
-                                <img src="{{asset('front_styles/img/markus-spiske-p2Xor4Lbrrk-unsplash.jpg')}}" class="d-block w-100 mb-4">
-                                <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit</h3>
+                                <img src="{{asset('storage/'.$news[2]->images->first()->path)}}" class="d-block w-100 mb-4">
+                                <h3>{{$news[2]->main_title}}</h3>
                             </a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla
-                                et
-                                dictum interdum, nisi lorem egestas vitae scel erisque enim ligula venenatis dolor.
-                                Maecenas nisl est, ultrices nec
-                                congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc
-                                sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc
-                                venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida
-                                venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh
-                                tempor porta.
-                            </p>
+                            <p class='block-with-text'>{!!$news[2]->sub_title!!}</p>
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
@@ -181,17 +167,14 @@
             </div>
             <div class="offset-md-1 col-sm col-md-3 pl-0">
                 <div class="art1 mb-4">
-                    <img src="{{asset('front_styles/img/alex-rainer-gJrw88bvATw-unsplash.jpg')}}" alt="" class="w-100 img-fluid mb-3">
-                    <h5>Lorem ipsum dolor, sit amet consectetur adipisicing elit</h5>
-                    <p>Lorem ipsum, dolor sit amet Nemo, beatae eveniet necessitatibus non
-                        laboriosam fugit quibusdam modi</p>
+                    <img src="{{asset('storage/'.$news[3]->images->first()->path)}}" alt="" class="w-100 img-fluid mb-3">
+                    <h5>{{$news[3]->main_title}}</h5>
+                    <p class='block-with-text'>{!!$news[3]->sub_title!!}</p>
                 </div>
                 <div class="art2">
-                    <img src="{{asset('front_styles/img/kyle-glenn-nXt5HtLmlgE-unsplash.jpg')}}" alt="" class="w-100 img-fluid mb-3">
-                    <h5>Lorem ipsum dolor, sit amet consectetur adipisicing elit</h5>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo, beatae eveniet necessitatibus
-                        non
-                    </p>
+                    <img src="{{asset('storage/'.$news[4]->images->first()->path)}}" alt="" class="w-100 img-fluid mb-3">
+                    <h5>{{$news[4]->main_title}}</h5>
+                    <p class='block-with-text'>{!!$news[4]->sub_title!!}</p>
                 </div>
             </div>
         </div>
@@ -204,14 +187,18 @@
     <section class="en-cok-oku">
         <h2 class="title mb-5 text-uppercase font-weight-bold">En çok okunanlar</h2>
         <div class="regular">
+            
+            @foreach($articles as $article)
             <a href="Details.html">
                 <figure>
-                    <img src="{{asset('front_styles/img/kyle-glenn-nXt5HtLmlgE-unsplash.jpg')}}"
+                    <img src="{{asset('storage/'.$article->images->first()->path)}}"
                          class="w-100 img-fluid mb-3">
-                    <figcaption>Lorem ipsum dolor, sit amet consectetur adipisicing elit</figcaption>
+                    <figcaption>{{$article->main_title}}</figcaption>
                 </figure>
             </a>
-            <a href="Details.html">
+            @endforeach
+            
+<!--            <a href="Details.html">
                 <figure class="figure mb 5">
                     <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}"
                          class="w-100 img-fluid mb-3">
@@ -259,7 +246,7 @@
                          class="w-100 img-fluid mb-3">
                     <figcaption>Lorem ipsum dolor, sit amet consectetur adipisicing elit</figcaption>
                 </figure>
-            </a>
+            </a>-->
 
         </div>
     </section>
@@ -272,35 +259,35 @@
         <div class="row img-art mb-5">
             <div class="col-sm col-md-6 col-lg-3 img-over">
                 <a href="Category.html">
-                    <figure><img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" alt=""
+                    <figure><img src="{{asset('storage/'.$categories[0]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" alt=""
                                  class="w-100 img-fluid mb-3">
                     </figure>
                     <div class="overlay">
-                        <h6 class="text-uppercase">category 1</h6>
+                        <h6 class="text-uppercase">{{$categories[0]->name}}</h6>
                         <p>lorem ipsum dolar sit</p>
                     </div>
                 </a>
             </div>
             <div class="col-sm col-md-6 col-lg-3 img-over">
-                <figure><img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" alt=""
+                <figure><img src="{{asset('storage/'.$categories[1]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" alt=""
                              class="w-100 img-fluid mb-3"></figure>
                 <div class="overlay">
-                    <h6 class="text-uppercase">category 2</h6>
+                    <h6 class="text-uppercase">{{$categories[1]->name}}</h6>
                     <p>lorem ipsum dolar sit</p>
                 </div>
             </div>
             <div class="col-sm col-md-6 col-lg-3 img-over">
-                <figure><img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" alt=""
+                <figure><img src="{{asset('storage/'.$categories[2]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" alt=""
                              class="w-100 img-fluid mb-3"></figure>
                 <div class="overlay">
-                    <h6 class="text-uppercase">category 3</h6>
+                    <h6 class="text-uppercase">{{$categories[2]->name}}</h6>
                     <p>lorem ipsum dolar sit</p>
                 </div>
             </div>
             <div class="col-sm col-md-6 col-lg-3 img-over">
-                <figure><img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" alt="" class="w-100 img-fluid mb-3"></figure>
+                <figure><img src="{{asset('storage/'.$categories[3]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" alt="" class="w-100 img-fluid mb-3"></figure>
                 <div class="overlay">
-                    <h6 class="text-uppercase">category 4</h6>
+                    <h6 class="text-uppercase">{{$categories[3]->name}}</h6>
                     <p>lorem ipsum dolar sit</p>
                 </div>
             </div>
@@ -308,13 +295,13 @@
             <div class="card col-sm col-md-6 col-lg-3 border-bottom mb-3" style="max-width: 540px;">
                 <div class="row no-gutters mb-3 ">
                     <div class="col-md-4">
-                        <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" class="card-img w-100 mt-3"
+                        <img src="{{asset('storage/'.$categories[0]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" class="card-img w-100 mt-3"
                              alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body ">
-                            <p class="mb-0">This is a wider card with supporting text</p>
-                            <p class="card-text"><small class="text-muted">published 3 mins ago</small></p>
+                            <p class="mb-0">{{$categories[0]->news()->orderBy('created_at', 'DESC')->first()->main_title}}</p>
+                            <p class="card-text"><small class="text-muted">published 0 mins ago</small></p>
                         </div>
                     </div>
                 </div>
@@ -323,12 +310,12 @@
             <div class="card col-sm col-md-6 col-lg-3 border-bottom mb-3" style="max-width: 540px;">
                 <div class="row no-gutters mb-3 ">
                     <div class="col-md-4">
-                        <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" class="card-img w-100 mt-3" alt="...">
+                        <img src="{{asset('storage/'.$categories[1]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" class="card-img w-100 mt-3" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body ">
-                            <p class="mb-0">This is a wider card with supporting text</p>
-                            <p class="card-text"><small class="text-muted">published 3 mins ago</small></p>
+                            <p class="mb-0">{{$categories[1]->news()->orderBy('created_at', 'DESC')->first()->main_title}}</p>
+                            <p class="card-text"><small class="text-muted">published 0 mins ago</small></p>
                         </div>
                     </div>
                 </div>
@@ -337,13 +324,13 @@
             <div class="card col-sm col-md-6 col-lg-3 border-bottom mb-3" style="max-width: 540px;">
                 <div class="row no-gutters mb-3 ">
                     <div class="col-md-4">
-                        <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" class="card-img w-100 mt-3"
+                        <img src="{{asset('storage/'.$categories[2]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" class="card-img w-100 mt-3"
                              alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body ">
-                            <p class="mb-0">This is a wider card with supporting text</p>
-                            <p class="card-text"><small class="text-muted">published 3 mins ago</small></p>
+                            <p class="mb-0">{{$categories[2]->news()->orderBy('created_at', 'DESC')->first()->main_title}}</p>
+                            <p class="card-text"><small class="text-muted">published 0 mins ago</small></p>
                         </div>
                     </div>
                 </div>
@@ -352,11 +339,41 @@
             <div class="card col-sm col-md-6 col-lg-3 border-bottom mb-3" style="max-width: 540px;">
                 <div class="row no-gutters mb-3 ">
                     <div class="col-md-4">
-                        <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" class="card-img w-100 mt-3" alt="...">
+                        <img src="{{asset('storage/'.$categories[3]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" class="card-img w-100 mt-3" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body ">
-                            <p class="mb-0">This is a wider card with supporting text</p>
+                            <p class="mb-0">{{$categories[3]->news()->orderBy('created_at', 'DESC')->first()->main_title}}</p>
+                            <p class="card-text"><small class="text-muted">published 0 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-sm col-md-6 col-lg-3 mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{asset('storage/'.$categories[0]->news()->orderBy('created_at', 'DESC')->skip(1)->take(1)->first()->images->first()->path)}}" class="card-img w-100 mt-3"
+                             alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="mb-0">{{$categories[0]->news()->orderBy('created_at', 'DESC')->skip(1)->take(1)->first()->main_title}}</p>
+                            <p class="card-text"><small class="text-muted">published 1 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-sm col-md-6 col-lg-3 mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{asset('storage/'.$categories[1]->news()->orderBy('created_at', 'DESC')->skip(1)->take(1)->first()->images->first()->path)}}" class="card-img w-100 mt-3"
+                             alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="mb-0">{{$categories[1]->news()->orderBy('created_at', 'DESC')->skip(1)->take(1)->first()->main_title}}</p>
                             <p class="card-text"><small class="text-muted">published 3 mins ago</small></p>
                         </div>
                     </div>
@@ -366,12 +383,12 @@
             <div class="card col-sm col-md-6 col-lg-3 mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" class="card-img w-100 mt-3"
+                        <img src="{{asset('storage/'.$categories[2]->news()->orderBy('created_at', 'DESC')->skip(1)->take(1)->first()->images->first()->path)}}" class="card-img w-100 mt-3"
                              alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <p class="mb-0">This is a wider card with supporting text</p>
+                            <p class="mb-0">{{$categories[2]->news()->orderBy('created_at', 'DESC')->skip(1)->take(1)->first()->main_title}}</p>
                             <p class="card-text"><small class="text-muted">published 3 mins ago</small></p>
                         </div>
                     </div>
@@ -381,42 +398,12 @@
             <div class="card col-sm col-md-6 col-lg-3 mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" class="card-img w-100 mt-3"
+                        <img src="{{asset('storage/'.$categories[3]->news()->orderBy('created_at', 'DESC')->skip(1)->take(1)->first()->images->first()->path)}}" class="card-img w-100 mt-3"
                              alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <p class="mb-0">This is a wider card with supporting text</p>
-                            <p class="card-text"><small class="text-muted">published 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card col-sm col-md-6 col-lg-3 mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" class="card-img w-100 mt-3"
-                             alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <p class="mb-0">This is a wider card with supporting text</p>
-                            <p class="card-text"><small class="text-muted">published 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card col-sm col-md-6 col-lg-3 mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" class="card-img w-100 mt-3"
-                             alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <p class="mb-0">This is a wider card with supporting text</p>
+                            <p class="mb-0">{{$categories[3]->news()->orderBy('created_at', 'DESC')->skip(1)->take(1)->first()->main_title}}</p>
                             <p class="card-text"><small class="text-muted">published 3 mins ago</small></p>
                         </div>
                     </div>
@@ -432,22 +419,20 @@
         <h2 class="title mb-5 text-uppercase front-weight-bold">world news</h2>
         <div class="row">
             <div class="col-sm col-md-6">
-                <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" alt="" class="w-100 img-fluid mb-3">
-                <h5 class="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta eligendi iure
-                    expedita ratione
-                    fuga repellat itaque ut beatae commodi harum quasi quisquam</h5>
+                <img src="{{asset('storage/'.$articles[0]->images->first()->path)}}" alt="" class="w-100 img-fluid mb-3">
+                <h5 class="card-title">{{$articles[0]->main_title}}</h5>
+                <p class="card-text">{{$articles[0]->sub_title}}</p>
             </div>
             <div class="col-sm col-md-6">
                 <div class="card mb-5" style="max-width: 540px;">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" class="card-img mb-3" alt="...">
+                            <img src="{{asset('storage/'.$articles[1]->images->first()->path)}}" class="card-img mb-3" alt="...">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body pt-0">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <h5 class="card-title">{{$articles[1]->main_title}}</h5>
+                                <p class="card-text">{{$articles[1]->sub_title}}</p>
                             </div>
                         </div>
                     </div>
@@ -456,13 +441,12 @@
                 <div class="card mb-5" style="max-width: 540px;">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" class="card-img mb-3" alt="...">
+                            <img src="{{asset('storage/'.$articles[2]->images->first()->path)}}" class="card-img mb-3" alt="...">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body pt-0">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
+                                 <h5 class="card-title">{{$articles[2]->main_title}}</h5>
+                                <p class="card-text">{{$articles[2]->sub_title}}</p>
                             </div>
                         </div>
                     </div>
@@ -470,13 +454,12 @@
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="{{asset('front_styles/img/markus-spiske-pKx_zEJSIr0-unsplash.jpg')}}" class="card-img mb-3" alt="...">
+                            <img src="{{asset('storage/'.$articles[3]->images->first()->path)}}" class="card-img mb-3" alt="...">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body pt-0">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
+                                 <h5 class="card-title">{{$articles[3]->main_title}}</h5>
+                                <p class="card-text">{{$articles[3]->sub_title}}</p>
                             </div>
                         </div>
                     </div>
