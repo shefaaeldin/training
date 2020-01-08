@@ -43,5 +43,55 @@ class HomeController extends Controller
         return view('dashboard');
     }
     
+     public function newsDetails($id)
+    {
+        $categories = Category::all();
+        $news = News::find($id);
+        $relatedNews = $news->relatedNews()->take(3)->get(); 
+//       dd($relatedNews);
+        return view('front/details',['news'=>$news,'categories'=>$categories,'relatedNews'=>$relatedNews]);   
+    }
+    
+     public function categoryindex($id)
+    {
+        $categories = Category::all();
+        $category = Category::find($id);
+      
+       $news = $category->news->where('type','=','news')-> sortByDesc('created_at')->take(5);
+       $news =$news->chunk(3);
+      
+        
+        
+    return view('front/category',['news'=>$news,'categories'=>$categories,'category'=>$category]);   
+    }
+    
+      public function newsIndex()
+    {
+       $categories = Category::all();
+       $news = News::where('type', 'news')
+                ->orderBy('created_at','desc')
+                ->take(5)
+                ->get();
+       $news =$news->chunk(3);
+  
+    return view('front/news',['news'=>$news,'categories'=>$categories]);   
+    }
+    
+      public function articlesIndex()
+    {
+       $categories = Category::all();
+       $news = News::where('type', 'article')
+                ->orderBy('created_at','desc')
+                ->take(5)
+                ->get();
+       $news =$news->chunk(3);
+       
+      
+  
+    return view('front/news',['news'=>$news,'categories'=>$categories]);   
+    }
+    
+    
+    
   
 }

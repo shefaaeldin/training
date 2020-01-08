@@ -57,6 +57,10 @@ Route::get('ajax/relatedimages/{id}', 'NewsController@getRelatedImages')->name('
 Route::delete('ajax/deleteimage/{id}', 'NewsController@deleteimage')->name('ajax.deleteimage.index');  
 Route::resource('category', 'CategoryController');
 Route::resource('tag', 'TagController');
+Route::get('home/details/{id}', 'HomeController@newsDetails')->name('news.details');
+Route::get('home/category/{id}','HomeController@categoryIndex')->name('news.front.category');  
+Route::get('home/news','HomeController@newsIndex')->name('news.front.index');
+Route::get('home/articles','HomeController@articlesIndex')->name('articles.front.index'); 
 
 
 
