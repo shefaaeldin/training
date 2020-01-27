@@ -9,15 +9,16 @@ use Illuminate\Support\Facades\Mail;
 
 class UserObserver
 {
-    
-    
+
+
      public function creating(User $user)
     {
-     $user->password = Hash::make($user->password);
- 
-       
-        
-      
+
+//     $user->password = Hash::make($user->password);
+
+
+
+
     }
     /**
      * Handle the user "created" event.
@@ -27,7 +28,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-       
+
     }
 
     /**

@@ -49,7 +49,7 @@ class NewsController extends Controller {
 //        {
 //        $image_path =  $request['file']->store('avatars');
 //        }
-//        
+//
 //        return $image_path;
 
 
@@ -104,10 +104,13 @@ class NewsController extends Controller {
      */
     public function update(Request $request, News $news) {
         $news->update($request->except('media'));
+       if($request['media'])
+       {
         $images = explode(',', $request['media']);
         foreach ($images as $img) {
             Image::create(['path' => $img, 'news_id' => $news->id]);
         }
+       }
         return redirect('/news')->with(['success' => 'The news has been successfully updated']);
     }
 
@@ -146,17 +149,10 @@ class NewsController extends Controller {
     public function getAuthors(Request $request) {
 
 
-        if ($request['type'] == 'news') {
 
-            $authors = User::whereHas('roles', function ($query) {
+        $authors = User::whereHas('roles', function ($query) {
                         $query->where('name', '=', 'writer');
                     })->get();
-        } else {
-            $authors = User::whereHas('roles', function ($query) {
-                        $query->where('name', '=', 'reporter');
-                    })->get();
-        }
-
 
         return $authors;
     }
@@ -177,7 +173,7 @@ class NewsController extends Controller {
 
 //       dd($request->all());
 //        $news = News::create($request->all());
-//       return redirect('/news')->with(['success'=>'The news has been successfully added']); 
+//       return redirect('/news')->with(['success'=>'The news has been successfully added']);
     }
 
     public function getRelatedImages(Request $request, $id) {
@@ -186,7 +182,7 @@ class NewsController extends Controller {
 
 //       dd($request->all());
 //        $news = News::create($request->all());
-//       return redirect('/news')->with(['success'=>'The news has been successfully added']); 
+//       return redirect('/news')->with(['success'=>'The news has been successfully added']);
     }
 
     public function deleteimage(Request $request, $id) {
@@ -197,7 +193,7 @@ class NewsController extends Controller {
 
 //       dd($request->all());
 //        $news = News::create($request->all());
-//       return redirect('/news')->with(['success'=>'The news has been successfully added']); 
+//       return redirect('/news')->with(['success'=>'The news has been successfully added']);
     }
 
 }

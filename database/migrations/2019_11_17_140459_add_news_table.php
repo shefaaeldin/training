@@ -18,12 +18,12 @@ class AddNewsTable extends Migration
             $table->unsignedInteger('writer_id');
             $table->foreign('writer_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('main_title');
-            $table->string('sub-title')->nullable();
+            $table->string('sub_title')->nullable();
             $table->string('content');
             $table->boolean('is_published')->default(0);
             $table->index('writer_id');
     });
-    
+
     }
 
     /**

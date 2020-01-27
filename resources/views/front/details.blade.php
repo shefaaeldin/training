@@ -28,17 +28,19 @@
                                 <img src="{{asset('storage/'.$news->images->first()->path)}}" class="d-block w-100 mb-4">
                             </a>
                         </div>
+                        
+                        @if($news->images->count() > 1)
+                   @for ($i = 1; $i < $news->images->count(); $i++)
+                      <div class="carousel-item">
+                            <a href="#">
+                                <img src="{{$news->images[$i] ? asset('storage/'.$news->images[$i]->path) : asset('storage/'.$news->images->first()->path) }}" class="d-block w-100 mb-4">
+                            </a>
+                        </div>
+                   @endfor
                    
-                        <div class="carousel-item">
-                            <a href="#">
-                                <img src="{{$news->images->get(1)? : asset('storage/'.$news->images->first()->path) }}" class="d-block w-100 mb-4">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="#">
-                                <img src="{{$news->images->get(2) ? asset('storage/'.$news->images->get(2)->path) : asset('storage/'.$news->images->first()->path) }}" class="d-block w-100 mb-4">
-                            </a>
-                        </div>
+                   @endif
+                   
+                       
                    
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button"

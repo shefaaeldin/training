@@ -48,7 +48,7 @@ class HomeController extends Controller
         $categories = Category::all();
         $news = News::find($id);
         $relatedNews = $news->relatedNews()->take(3)->get(); 
-//       dd($relatedNews);
+//        dd($news->images[0]);
         return view('front/details',['news'=>$news,'categories'=>$categories,'relatedNews'=>$relatedNews]);   
     }
     
@@ -84,11 +84,28 @@ class HomeController extends Controller
                 ->orderBy('created_at','desc')
                 ->take(5)
                 ->get();
+       
+       
        $news =$news->chunk(3);
        
       
   
     return view('front/news',['news'=>$news,'categories'=>$categories]);   
+    }
+    
+      public function search(Request $request)
+    {
+          
+       
+       $news = News::where('main_title', 'like','%' . $request['keyword'] . '%')
+                ->paginate(3);
+       
+//       dd($news->all());
+       
+       
+           
+  
+    return view('front/search_results',['news'=>$news,'categories'=>Category::all(),'keyword'=>$request['keyword']]);   
     }
     
     
