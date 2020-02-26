@@ -3,6 +3,15 @@
 @section('head')
 
     <title>News</title>
+    <style>
+       p{
+          
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    }
+    </style>
   
 @endsection
 
@@ -34,7 +43,30 @@
                 </div>
                @endforeach
             </div>
+
+            <h2 class="title mb-5 text-uppercase font-weight-bold">All News</h2>
+
         </div>
+
+        <div class="row no-gutters">
+            
+            <div class="col-sm col-md-8 pl-0 mb-5">
+                
+            @foreach($AllNews as $new)
+                <section class="category-news mb-5">
+                    <img src="{{asset('storage/'.$new->images->first()->path)}}" alt="" class="w-50 img-fluid mb-4">
+                    <a href="{{ route('news.details', ['id' => $new->id])}}">
+                        <h3>{{$new->main_title}}</h3>
+                    </a>
+                    <p> {!!$new->content!!} </p>
+                </section>
+                @endforeach
+            </div>
+        </div>
+
+        <div style = "margin-left: 100px">
+     {{ $AllNews->links()}}
+     </div>
 
     </section>
     

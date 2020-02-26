@@ -59,22 +59,34 @@ class HomeController extends Controller
       
        $news = $category->news->where('type','=','news')-> sortByDesc('created_at')->take(5);
        $news =$news->chunk(3);
+
+       
+       $AllNews = News::with(['categories' => function ($query) {
+        $query->where('name', 'equal','sports');
+        }])->paginate(3);
+      //  dd($AllNews);
       
         
         
-    return view('front/category',['news'=>$news,'categories'=>$categories,'category'=>$category]);   
+    return view('front/category',['news'=>$news,'AllNews'=>$AllNews,'categories'=>$categories,'category'=>$category]);   
     }
     
-      public function newsIndex()
+      public function newsIndex(Request $request)
     {
+      // dd($request->all());
        $categories = Category::all();
        $news = News::where('type', 'news')
                 ->orderBy('created_at','desc')
                 ->take(5)
                 ->get();
        $news =$news->chunk(3);
+
+       
+
+       $AllNews = News::where('type', 'news')->paginate(5);
+      //  dd($AllNews->all());
   
-    return view('front/news',['news'=>$news,'categories'=>$categories]);   
+    return view('front/news',['news'=>$news,'AllNews'=>$AllNews,'categories'=>$categories]);   
     }
     
       public function articlesIndex()
@@ -87,10 +99,12 @@ class HomeController extends Controller
        
        
        $news =$news->chunk(3);
+
+       $AllNews = News::where('type', 'article')->paginate(5);
        
       
   
-    return view('front/news',['news'=>$news,'categories'=>$categories]);   
+    return view('front/news',['news'=>$news,'AllNews'=>$AllNews,'categories'=>$categories]);   
     }
     
       public function search(Request $request)
