@@ -26,6 +26,8 @@
         <h2 class="title mb-5 text-uppercase font-weight-bold">bugünün seçtikleri</h2>
         <div class="row no-gutters mb-5">
             <div class="col-sm col-md-8 pl-0">
+
+            
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
@@ -33,6 +35,8 @@
                         <li data-target="#carouselExampleControls" data-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner">
+
+                    @isset($news[0])
                         <div class="carousel-item active">
                             <a href="{{ route('news.details', ['id' => $news[0]->id])}}">
                                 <img src="{{asset('storage/'.$news[0]->images->first()->path)}}" class="d-block w-100 mb-4">
@@ -40,6 +44,10 @@
                             </a>
                             <p class='block-with-text'>{!!$news[0]->sub_title!!}</p>
                         </div>
+
+                        @endisset
+
+                        @isset($news[1])
                         <div class="carousel-item">
                             <a href="{{ route('news.details', ['id' => $news[1]->id])}}">
                                 <img src="{{asset('storage/'.$news[1]->images->first()->path)}}" class="d-block w-100 mb-4">
@@ -47,6 +55,9 @@
                             </a>
                            <p class='block-with-text'>{!!$news[1]->sub_title!!}</p>
                         </div>
+                        @endisset
+
+                        @isset($news[2])
                         <div class="carousel-item">
                             <a href="{{ route('news.details', ['id' => $news[2]->id])}}">
                                 <img src="{{asset('storage/'.$news[2]->images->first()->path)}}" class="d-block w-100 mb-4">
@@ -54,6 +65,7 @@
                             </a>
                             <p class='block-with-text'>{!!$news[2]->sub_title!!}</p>
                         </div>
+                        @endisset
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
                        data-slide="prev">
@@ -66,6 +78,8 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+
+               
 
                 <!--
                 <img src="img/roya-ann-miller-_T9A8yrMqHY-unsplash.jpg" alt="" class="w-100 img-fluid mb-4">
@@ -82,16 +96,24 @@
                     tempor porta. -->
             </div>
             <div class="offset-md-1 col-sm col-md-3 pl-0">
+            @isset($news[3])
                 <div class="art1 mb-4">
                     <img src="{{asset('storage/'.$news[3]->images->first()->path)}}" alt="" class="w-100 img-fluid mb-3">
                     <a href="{{ route('news.details', ['id' => $news[3]->id])}}"><h5>{{$news[3]->main_title}}</h5></a>
                     <p class='block-with-text'>{!!$news[3]->sub_title!!}</p>
                 </div>
+
+                @endisset
+
+                @isset($news[4])
                 <div class="art2">
                     <img src="{{asset('storage/'.$news[4]->images->first()->path)}}" alt="" class="w-100 img-fluid mb-3">
                     <a href="{{ route('news.details', ['id' => $news[3]->id])}}"><h5>{{$news[4]->main_title}}</h5></a>
                     <p class='block-with-text'>{!!$news[4]->sub_title!!}</p>
                 </div>
+
+                @endisset
+
             </div>
         </div>
     </section>
@@ -103,7 +125,7 @@
     <section class="en-cok-oku">
         <h2 class="title mb-5 text-uppercase font-weight-bold">En çok okunanlar</h2>
         <div class="regular">
-            
+        @isset($articles)
             @foreach($articles as $article)
             <a href="{{ route('news.details', ['id' => $article->id])}}">
                 <figure>
@@ -113,6 +135,9 @@
                 </figure>
             </a>
             @endforeach
+
+            @endisset
+
             
 <!--            <a href="Details.html">
                 <figure class="figure mb 5">
@@ -173,6 +198,7 @@
     <section class="categories">
         <h2 class="title mb-5 text-uppercase front-weight-bold">categories</h2>
         <div class="row img-art mb-5">
+        @isset($categories[0])
             <div class="col-sm col-md-6 col-lg-3 img-over">
                 <a href="Category.html">
                     <figure><img src="{{asset('storage/'.$categories[0]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" alt=""
@@ -184,6 +210,9 @@
                     </div>
                 </a>
             </div>
+            @endisset
+
+            @isset($categories[1])
             <div class="col-sm col-md-6 col-lg-3 img-over">
                 <figure><img src="{{asset('storage/'.$categories[1]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" alt=""
                              class="w-100 img-fluid mb-3"></figure>
@@ -192,6 +221,9 @@
                     <p>lorem ipsum dolar sit</p>
                 </div>
             </div>
+            @endisset
+
+            @isset($categories[2])
             <div class="col-sm col-md-6 col-lg-3 img-over">
                 <figure><img src="{{asset('storage/'.$categories[2]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" alt=""
                              class="w-100 img-fluid mb-3"></figure>
@@ -200,6 +232,9 @@
                     <p>lorem ipsum dolar sit</p>
                 </div>
             </div>
+            @endisset
+
+            @isset($categories[3])
             <div class="col-sm col-md-6 col-lg-3 img-over">
                 <figure><img src="{{asset('storage/'.$categories[3]->news()->orderBy('created_at', 'DESC')->first()->images->first()->path)}}" alt="" class="w-100 img-fluid mb-3"></figure>
                 <div class="overlay">
@@ -207,7 +242,9 @@
                     <p>lorem ipsum dolar sit</p>
                 </div>
             </div>
+            @endisset
 
+            @isset($categories[0])
             <div class="card col-sm col-md-6 col-lg-3 border-bottom mb-3" style="max-width: 540px;">
                 <div class="row no-gutters mb-3 ">
                     <div class="col-md-4">
@@ -222,7 +259,10 @@
                     </div>
                 </div>
             </div>
+            @endisset
 
+
+            @isset($categories[1])
             <div class="card col-sm col-md-6 col-lg-3 border-bottom mb-3" style="max-width: 540px;">
                 <div class="row no-gutters mb-3 ">
                     <div class="col-md-4">
@@ -236,7 +276,9 @@
                     </div>
                 </div>
             </div>
-
+            @endisset
+    
+            @isset($categories[2])
             <div class="card col-sm col-md-6 col-lg-3 border-bottom mb-3" style="max-width: 540px;">
                 <div class="row no-gutters mb-3 ">
                     <div class="col-md-4">
@@ -251,7 +293,9 @@
                     </div>
                 </div>
             </div>
+            @endisset
 
+            @isset($categories[3])
             <div class="card col-sm col-md-6 col-lg-3 border-bottom mb-3" style="max-width: 540px;">
                 <div class="row no-gutters mb-3 ">
                     <div class="col-md-4">
@@ -265,7 +309,9 @@
                     </div>
                 </div>
             </div>
+            @endisset
 
+            @isset($categories[0])
             <div class="card col-sm col-md-6 col-lg-3 mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -280,7 +326,9 @@
                     </div>
                 </div>
             </div>
+            @endisset
 
+           @isset($categories[1])
             <div class="card col-sm col-md-6 col-lg-3 mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -295,7 +343,9 @@
                     </div>
                 </div>
             </div>
+            @endisset
 
+            @isset($categories[2])
             <div class="card col-sm col-md-6 col-lg-3 mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -310,7 +360,9 @@
                     </div>
                 </div>
             </div>
+            @endisset
 
+            @isset($categories[3])
             <div class="card col-sm col-md-6 col-lg-3 mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -325,6 +377,7 @@
                     </div>
                 </div>
             </div>
+            @endisset
 
         </div>
     </section>
@@ -334,12 +387,18 @@
     <section class="world">
         <h2 class="title mb-5 text-uppercase front-weight-bold">world news</h2>
         <div class="row">
+
+        @isset($articles[0])
             <div class="col-sm col-md-6">
                 <img src="{{asset('storage/'.$articles[0]->images->first()->path)}}" alt="" class="w-100 img-fluid mb-3">
                 <h5 class="card-title">{{$articles[0]->main_title}}</h5>
                 <p class="card-text">{{$articles[0]->sub_title}}</p>
             </div>
+        @endisset
+
+        
             <div class="col-sm col-md-6">
+            @isset($articles[1])
                 <div class="card mb-5" style="max-width: 540px;">
                     <div class="row no-gutters">
                         <div class="col-md-4">
@@ -354,6 +413,10 @@
                     </div>
                 </div>
 
+                @endisset
+
+                @isset($articles[2])
+
                 <div class="card mb-5" style="max-width: 540px;">
                     <div class="row no-gutters">
                         <div class="col-md-4">
@@ -367,6 +430,10 @@
                         </div>
                     </div>
                 </div>
+
+                @endisset
+
+                @isset($articles[3])
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row no-gutters">
                         <div class="col-md-4">
@@ -380,6 +447,8 @@
                         </div>
                     </div>
                 </div>
+
+                @endisset
             </div>
         </div>
     </section>
